@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ListaLivrosFragment">
+
+    <fragment
+        android:id="@+id/ListaLivrosFragment"
+        android:name="com.example.livros.ListaLivroFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_lista_livros">
+
+        <action
+            android:id="@+id/action_novoLivro"
+            app:destination="@id/AdicionarLivroFragment" />
+        <action
+            android:id="@+id/action_alterar_livro"
+            app:destination="@id/alteraLivroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AdicionarLivroFragment"
+        android:name="com.example.livros.AdicionarLivroFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_adicionar_livro">
+        <action
+            android:id="@+id/action_NovoLivro_to_ListaLivros"
+            app:destination="@id/ListaLivrosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alteraLivroFragment"
+        android:name="com.example.livros.AlteraLivroFragment"
+        android:label="fragment_altera_livro"
+        tools:layout="@layout/fragment_altera_livro" >
+        <action
+            android:id="@+id/action_alteraLivroFragment_to_ListaLivrosFragment"
+            app:destination="@id/ListaLivrosFragment" />
+    </fragment>
+</navigation>
