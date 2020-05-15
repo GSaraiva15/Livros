@@ -104,4 +104,24 @@ public class BdLivrosTest {
 
         bd.close();
     }
+    @Test
+    public void consegueApagarCategoria(){
+        Context appContext = getTargetContext();
+
+        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
+        SQLiteDatabase bd = openHelper.getWritableDatabase();
+
+        BdTableCategorias tabelaCategorias = new BdTableCategorias(bd);
+
+        Categoria categoria = new Categoria();
+        categoria.setDescricao("TESTE");
+
+        long id = tabelaCategorias.insert(Converte.categoriaToContentValues(categoria));
+        assertNotEquals(-1,id);
+
+        int registosApagados =tabelaCategorias.delete(BdTableCategorias._ID + "=?",new String[]{String.valueOf(id) });
+        assertEquals(1,registosApagados);
+
+        bd.close();
+    }
 }
