@@ -6,38 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ListaLivroFragment">
 
-    <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lista Livros"
-        app:layout_constraintBottom_toTopOf="@id/buttonNovo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
+    <FrameLayout
+        android:layout_width="256dp"
+        android:layout_height="6dp"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="199dp">
 
-    <Button
-        android:id="@+id/buttonNovo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginBottom="300dp"
-        android:text="Novo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/buttonAlterar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:text="Alterar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/buttonNovo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.568"
-        app:layout_constraintStart_toEndOf="@+id/buttonNovo" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewLivros"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

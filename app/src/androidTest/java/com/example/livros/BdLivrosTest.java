@@ -176,4 +176,37 @@ public class BdLivrosTest {
 
         bdLivros.close();
     }
+    @Test
+    public void consegueAlterarLivros() {
+        Context appContext = getTargetContext();
+
+        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
+        SQLiteDatabase bdLivros = openHelper.getWritableDatabase();
+
+        long idLivro = insereLivro(bdLivros, "O silencio dos inocentes","Thriller");
+
+        BdTableLivros tabelaLivros = new BdTableLivros(bdLivros);
+        Cursor cursor = tabelaLivros.query(BdTableLivros.TODOS_CAMPOS, BdTableLivros._ID + "=?",new String[]{String.valueOf(idLivro)},null,null,null);
+        int registosAfetados = cursor.getCount();
+        cursor.close();
+
+        insereLivro(bdLivros, "O Intruso II", "Terror/Ação");
+
+        cursor = tabelaLivros.query(BdTableLivros.TODOS_CAMPOS, null, null, null, null, null);
+        assertEquals(registosAfetados + 1, cursor.getCount());
+        cursor.close();
+
+        bdLivros.close();
+    }
+    @Test
+    public void consegueEliminarLivros(){
+        Context appContext = getTargetContext();
+
+        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(appContext);
+        SQLiteDatabase bdLivros = openHelper.getWritableDatabase();
+
+        long id = insereLivro(bdLivros, "O silencio dos inocentes","Thriller");
+
+        BdTableLivros tabelaLivro()
+    }
 }
