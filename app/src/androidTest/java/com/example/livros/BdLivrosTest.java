@@ -186,15 +186,17 @@ public class BdLivrosTest {
         long idLivro = insereLivro(bdLivros, "O silencio dos inocentes","Thriller");
 
         BdTableLivros tabelaLivros = new BdTableLivros(bdLivros);
+
         Cursor cursor = tabelaLivros.query(BdTableLivros.TODOS_CAMPOS, BdTableLivros._ID + "=?",new String[]{String.valueOf(idLivro)},null,null,null);
-        int registosAfetados = cursor.getCount();
+        assertEquals(1,cursor.getCount());
+        assertTrue(cursor.moveToNext());
+        Livro livro  = Converte.cursorToLivro(cursor);
         cursor.close();
+        assertEquals("O  silencioods inocentes",livro.getTitulo());
 
-        insereLivro(bdLivros, "O Intruso II", "Terror/Ação");
+        livro.setTitulo("o misterio do quarto secreto");
+        int registosAfetados =tabelaLivros.update(Converte.livroToContentValues(livro),BdTableLivros._ID);
 
-        cursor = tabelaLivros.query(BdTableLivros.TODOS_CAMPOS, null, null, null, null, null);
-        assertEquals(registosAfetados + 1, cursor.getCount());
-        cursor.close();
 
         bdLivros.close();
     }
@@ -207,6 +209,8 @@ public class BdLivrosTest {
 
         long id = insereLivro(bdLivros, "O silencio dos inocentes","Thriller");
 
-        BdTableLivros tabelaLivro()
+        BdTableLivros tabelaLivros = new BdTableLivros(bdLivros);
+        int registosEliminads = tabelaLivros.delete(BdTableLivros._ID+"=?",new String[]{String.valueOf(id)});
+        bdLivros.close();
     }
 }
