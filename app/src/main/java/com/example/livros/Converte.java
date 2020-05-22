@@ -1,6 +1,7 @@
 package com.example.livros;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 public class Converte {
     public static ContentValues categoriaToContentValues(Categoria categoria){
@@ -34,5 +35,14 @@ public class Converte {
 
         return livro;
 
+    }
+    public static Livro cursorToLivro(Cursor cursor) {
+        Livro livro = new Livro();
+
+        livro.setId(cursor.getLong(cursor.getColumnIndex(BdTableLivros._ID)));
+        livro.setTitulo(cursor.getString(cursor.getColumnIndex(BdTableLivros.CAMPO_TITULO)));
+        livro.setIdCategoria(cursor.getLong(cursor.getColumnIndex(BdTableLivros.CAMPO_CATEGORIA)));
+
+        return livro;
     }
 }

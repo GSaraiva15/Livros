@@ -1,5 +1,7 @@
 package com.example.livros;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -7,6 +9,11 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLivro> {
+    private final Context context;
+    public AdaptadorLivros(Context context) {
+        this.context=context;
+    }
+
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
      * an item.
@@ -30,7 +37,8 @@ class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLi
     @NonNull
     @Override
     public ViewHolderLivro onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View itemLivro = LayoutInflater.from(context).inflate(R.layout.item_livro, parent,false);
+        return new ViewHolderLivro(itemLivro);
     }
 
     /**
