@@ -1,6 +1,7 @@
 package com.example.livros;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ public class ListaLivroFragment extends Fragment {
         AdaptadorLivros adaptadorLivros= new AdaptadorLivros(context);
         recyclerViewLivros.setAdapter(adaptadorLivros);
         recyclerViewLivros.setLayoutManager(new LinearLayoutManager(context));
+
+        Cursor cursor = null; //TODO: obter a partir da base de dados
+        adaptadorLivros.setCursor(cursor);
     }
     private void alterarLivro(){
     NavController navController = NavHostFragment.findNavController(ListaLivroFragment.this);
