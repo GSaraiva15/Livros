@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class BdLivrosTest {
     @Before
+    @After
     public void apagaBaseDados() {
         getTargetContext().deleteDatabase(BdLivrosOpenHelper.NOME_BASE_DADOS);
     }
@@ -192,7 +194,7 @@ public class BdLivrosTest {
         assertTrue(cursor.moveToNext());
         Livro livro  = Converte.cursorToLivro(cursor);
         cursor.close();
-        assertEquals("O  silencioods inocentes",livro.getTitulo());
+        assertEquals("O silencio dos inocentes",livro.getTitulo());
 
         livro.setTitulo("o misterio do quarto secreto");
         int registosAfetados =tabelaLivros.update(Converte.livroToContentValues(livro), BdTableLivros._ID + "=?", new String[]{String.valueOf(livro.getId())});
