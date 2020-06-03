@@ -1,7 +1,6 @@
 package com.example.livros;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,8 +19,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.loader.content.CursorLoader;
 
 public class ListaLivroFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private AdaptadorLivros adaptadorLivros;
 
     @Override
     public View onCreateView(
@@ -38,19 +40,10 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
         Context context = getContext();
 
         RecyclerView recyclerViewLivros = (RecyclerView) view.findViewById(R.id.recycleViewLivros);
-        AdaptadorLivros adaptadorLivros = new AdaptadorLivros(context);
+        adaptadorLivros = new AdaptadorLivros(context);
         recyclerViewLivros.setAdapter(adaptadorLivros);
         recyclerViewLivros.setLayoutManager(new LinearLayoutManager(context));
-
-        BdLivrosOpenHelper openHelper = new BdLivrosOpenHelper(context);
-        SQLiteDatabase bdLivros = openHelper.getReadableDatabase();
-        BdTableLivros tableLivros = new BdTableLivros(bdLivros);
-        Cursor cursor = tableLivros.query(BdTableLivros.TODOS_CAMPOS, null, null, null, null, null);
-
-        getActivity().startManagingCursor(cursor);
-
-        adaptadorLivros.setCursor(cursor);
-
+        
     }
     private void alterarLivro(){
     NavController navController = NavHostFragment.findNavController(ListaLivroFragment.this);
@@ -62,9 +55,7 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
     }
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args){
-        //new CursorLoader(getContext(),)
-
-        return null;
+        return new CursorLoader(getContext(),LivrosContentProvider.ENDERECO_LIVROS,BdTableLivros.TODOS_CAMPOS,null,null,BdTableLivros.CAMPO_TITULO);
     }
 
     /**
@@ -110,7 +101,7 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
      */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-
+        adaptadorLivros.setCursor(data);
     }
 
     /**
@@ -124,7 +115,7 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
      */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        
+        adaptadorLivros.setCursor(null);
     }
 
 
