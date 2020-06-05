@@ -14,7 +14,9 @@ class AdaptadorLivros extends RecyclerView.Adapter <AdaptadorLivros.ViewHolderLi
     private final Context context;
 
     public void setCursor(Cursor cursor) {
+        if(cursor != this.cursor)
         this.cursor = cursor;
+        notifyDataSetChanged();
     }
 
     private Cursor cursor = null;
