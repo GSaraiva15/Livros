@@ -2,7 +2,6 @@ package com.example.livros;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +58,7 @@ public class ListaLivroFragment extends Fragment implements LoaderManager.Loader
     }
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args){
-        return new CursorLoader(getContext(),LivrosContentProvider.ENDERECO_LIVROS,BdTableLivros.TODOS_CAMPOS,null,null,BdTableLivros.CAMPO_TITULO);
+        return new CursorLoader(getContext(),LivrosContentProvider.ENDERECO_LIVROS,BdTableLivros.TODOS_CAMPOS,null,null,BdTableLivros.CAMPO_TITULO_COMPLETO);
     }
 
     /**
