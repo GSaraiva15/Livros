@@ -16,11 +16,12 @@
         android:id="@+id/action_alterar_livro"
         android:icon="@drawable/ic_baseline_edit_24"
         android:title="Alterar"
+        android:visible="false"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_eliminar_livro"
         android:icon="@drawable/ic_baseline_delete_24"
         android:title="Eliminar"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="ifRoom" />
 </menu>
